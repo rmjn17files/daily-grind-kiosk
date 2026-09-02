@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Daily Grind | Self-Order Kiosk</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Start / Welcome Screen Overlay -->
+    <div id="welcomeScreen" class="welcome-screen">
+        <div class="welcome-content">
+            <div class="brand-icon">☕</div>
+            <h1>The Daily Grind</h1>
+            <p>Craft Coffee & Artisanal Bakery</p>
+            <button class="btn-start-order">Tap to Start Order</button>
+        </div>
+    </div>
+
+    <!-- Main Kiosk Application Shell -->
+    <div class="kiosk-shell">
+        
+        <!-- Top Header -->
+        <header class="kiosk-header">
+            <div class="brand-title">
+                <span class="logo">☕</span>
+                <h2>The Daily Grind</h2>
+            </div>
+            <button id="cancelOrderBtn" class="btn-cancel">Cancel Order</button>
+        </header>
+
+        <!-- Kiosk Main Workspace -->
+        <div class="kiosk-body">
+            
+            <!-- Side Navigation Menu Categories -->
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-category="hot">
+                    <span class="icon">🔥</span>
+                    <span>Hot Coffee</span>
+                </button>
+                <button class="nav-item" data-category="cold">
+                    <span class="icon">🧊</span>
+                    <span>Iced Coffee</span>
+                </button>
+                <button class="nav-item" data-category="bakery">
+                    <span class="icon">🥐</span>
+                    <span>Fresh Bakery</span>
+                </button>
+            </nav>
+
+            <!-- Product Menu Grid -->
+            <main class="menu-container">
+                <div class="menu-grid" id="menuGrid">
+                    <!-- Dynamic Category Cards Populated via JS -->
+                </div>
+            </main>
+        </div>
+
+        <!-- Fixed Bottom Order Tray Bar -->
+        <footer class="kiosk-footer">
+            <div class="cart-summary-box">
+                <div class="badge-count">
+                    <span id="cartCountBadge">0</span>
+                </div>
+                <div class="cart-text">
+                    <span>Items Selected</span>
+                    <div class="cart-total">Total: <strong>$<span id="totalPrice">0.00</span></strong></div>
+                </div>
+            </div>
+            <button id="checkoutBtn" class="btn-checkout" disabled>Proceed to Pay &rarr;</button>
+        </footer>
+    </div>
+
+    <!-- Step 1: Options Selection Modal -->
+    <div id="checkoutModal" class="modal hidden">
+        <div class="modal-card">
+            <span id="closeCheckoutModal" class="close-btn">&times;</span>
+            <h2>Select Order Details</h2>
+            
+            <form id="checkoutForm">
+                <div class="form-group">
+                    <label class="group-label">Dining Option</label>
+                    <div class="tile-row">
+                        <label class="tile-option">
+                            <input type="radio" name="diningOption" value="Dine-In" checked>
+                            <div class="tile-box">
+                                <span class="tile-icon">🍽️</span>
+                                <span>Dine-In</span>
+                            </div>
+                        </label>
+                        <label class="tile-option">
+                            <input type="radio" name="diningOption" value="Take-Out">
+                            <div class="tile-box">
+                                <span class="tile-icon">🛍️</span>
+                                <span>Take-Out</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="group-label">Payment at Counter</label>
+                    <div class="tile-row">
+                        <label class="tile-option">
+                            <input type="radio" name="paymentMethod" value="Cash" checked>
+                            <div class="tile-box">
+                                <span class="tile-icon">💵</span>
+                                <span>Cash Counter</span>
+                            </div>
+                        </label>
+                        <label class="tile-option">
+                            <input type="radio" name="paymentMethod" value="Cashless (Card / Scan)">
+                            <div class="tile-box">
+                                <span class="tile-icon">💳</span>
+                                <span>Cashless Counter</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="summary-box">
+                    <p>Total Due at Counter: <strong>$<span id="modalTotal">0.00</span></strong></p>
+                </div>
+
+                <button type="submit" class="btn-primary full-width">Confirm & Submit Order</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Step 2: Confirmation Ticket Modal -->
+    <div id="ticketModal" class="modal hidden">
+        <div class="modal-card text-center">
+            <div class="checkmark-icon">&#10004;</div>
+            <h2>Order Sent to Counter!</h2>
+            
+            <div class="ticket-display">
+                <p class="ticket-heading">Your Counter Ticket Number</p>
+                <div id="confirmedTicketNumber" class="ticket-number">#DG-0000</div>
+                <small>Please present this number to the cashier to pay for and claim your order.</small>
+            </div>
+
+            <div id="ticketDetails" class="ticket-details-box">
+                <!-- Order details generated via JavaScript -->
+            </div>
+
+            <button id="doneTicketBtn" class="btn-primary full-width">Finish / Next Customer</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
